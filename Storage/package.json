@@ -1,6 +1,6 @@
 {
   "name": "@chispecial/storage",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "indexDb local storage made easy",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shadrach-chukwukere/MyLibrary.git"
+    "url": "https://github.com/shadrach-chukwukere/MyLibrary/tree/main/Storage"
   },
   "license": "ISC",
   "type": "module",
