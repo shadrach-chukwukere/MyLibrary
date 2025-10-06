@@ -1,0 +1,20 @@
+{
+  "name": "@chispecial/storage",
+  "version": "1.0.2",
+  "description": "indexDb local storage made easy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Database",
+    ".open",
+    ".set",
+    "indexDb",
+    "..."
+  ],
+  "author": "chinemerem chukwukere",
+  "license": "ISC",
+  "type": "module",
+  "types": "index.d.ts"
+}
