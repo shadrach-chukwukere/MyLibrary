@@ -1,2 +1,41 @@
-node_modules
-README.md
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist/
+build/
+coverage/
+
+# Environment variables
+.env
+.env.*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs and temp
+*.log
+*.tmp
+*.bak
+
+# TypeScript cache (if any)
+*.tsbuildinfo
+
+# Example/demo code (if local only)
+example/
+test/
+__tests__/
+
+# Lock files (optional if you don’t want to commit them)
+# package-lock.json
+# yarn.lock
