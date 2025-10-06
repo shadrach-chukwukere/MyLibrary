@@ -1,6 +1,6 @@
 {
   "name": "@chispecial/storage",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "indexDb local storage made easy",
   "main": "index.js",
   "scripts": {
@@ -10,10 +10,16 @@
     "Database",
     ".open",
     ".set",
-    "indexDb",
-    "..."
+    "indexDb"
   ],
-  "author": "chinemerem chukwukere",
+  "author": {
+    "name": "Chinemerem Chukwukere",
+    "email": "chispecialshadrach@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shadrach-chukwukere/MyLibrary.git"
+  },
   "license": "ISC",
   "type": "module",
   "types": "index.d.ts"
