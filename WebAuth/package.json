@@ -1,6 +1,6 @@
 {
   "name": "@chispecial/web_auth",
-  "version": "1.0.2",
+  "version": "1.0.9",
   "description": "Web Auth",
   "main": "index.js",
   "private": false,

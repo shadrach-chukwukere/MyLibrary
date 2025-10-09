@@ -1,7 +1,12 @@
 // index.d.ts
 
 declare class PasswordCredential {
-  constructor(init: { id: string; password: string; name?: string; iconURL?: string });
+  constructor(init: {
+    id: string;
+    password: string;
+    name?: string;
+    iconURL?: string;
+  });
   readonly id: string;
   readonly password: string;
   readonly name?: string;
@@ -27,7 +32,7 @@ export interface PasswordStoreOptions {
   password: string;
 }
 
-export declare class WebAuthnManager {
+export declare class WebAuthManager {
   rpName: string;
   timeout: number;
   isSupported: boolean;
@@ -38,8 +43,14 @@ export declare class WebAuthnManager {
   static randomBytes(len?: number): Uint8Array;
   static base64ToUint8Array(base64?: string): Uint8Array;
 
-  createCredential(options?: CredentialOptions): Promise<PublicKeyCredential | null>;
-  getCredential(options?: GetCredentialOptions): Promise<PublicKeyCredential | null>;
-  storeCredential(options: PasswordStoreOptions): Promise<PasswordCredential | null>;
+  createCredential(
+    options?: CredentialOptions
+  ): Promise<PublicKeyCredential | null>;
+  getCredential(
+    options?: GetCredentialOptions
+  ): Promise<PublicKeyCredential | null>;
+  storeCredential(
+    options: PasswordStoreOptions
+  ): Promise<PasswordCredential | null>;
   deleteCredential(): Promise<void>; // ← here
 }
