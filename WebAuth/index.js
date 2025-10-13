@@ -1,5 +1,5 @@
-export class WebAuthManager {
-  constructor(rpName = "My App", timeout = 60000) {
+class WebAuthManager {
+  constructor(rpName = "Web Auth ", timeout = 60000) {
     this.rpName = rpName;
     this.timeout = timeout;
     this.isSupported = !!window.PublicKeyCredential;
@@ -13,9 +13,12 @@ export class WebAuthManager {
   /** Generate secure random bytes */
   static randomBytes(length = 32) {
     const arr = new Uint8Array(length);
-    if (crypto?.getRandomValues) crypto.getRandomValues(arr);
-    else console.warn("⚠️ crypto.getRandomValues not supported.");
-    return arr;
+    if (crypto?.getRandomValues) {
+      crypto.getRandomValues(arr);
+    } else {
+      console.warn("⚠️ crypto.getRandomValues not supported.");
+    }
+    return arr.buffer; // Return as ArrayBuffer for credential options
   }
 
   /** Base64URL → Uint8Array */
@@ -39,7 +42,7 @@ export class WebAuthManager {
       .replace(/=+$/, "");
   }
 
-  /** Create a new WebAuthn credential */
+  /** Create a new WebAuthn credential (Passkey Registration) */
   async createCredential({
     challengeStr,
     username = "",
@@ -50,14 +53,14 @@ export class WebAuthManager {
 
     try {
       const challenge = challengeStr
-        ? WebAuthManager.base64ToUint8Array(challengeStr)
+        ? WebAuthManager.base64ToUint8Array(challengeStr).buffer
         : WebAuthManager.randomBytes(32);
 
       const userId = WebAuthManager.randomBytes(16);
 
       const publicKey = {
         challenge,
-        rp: { name: this.rpName },
+        rp: { name: this.rpName, id: window.location.hostname || "localhost" },
         user: {
           id: userId,
           name: username,
@@ -70,21 +73,37 @@ export class WebAuthManager {
         authenticatorSelection: {
           residentKey: "preferred",
           userVerification: "required",
+          authenticatorAttachment: "cross-platform",
         },
         timeout,
-        attestation: "none", // faster and more privacy-friendly
+        attestation: "none", // faster and privacy-friendly
       };
 
+      console.log(
+        `📤 Sending request to create Passkey for user: ${username}...`
+      );
       const credential = await navigator.credentials.create({ publicKey });
-      console.info("✅ Credential created successfully.");
-      return credential;
+
+      if (credential) {
+        console.log("✅ Credential created successfully.");
+        console.log(
+          `Raw ID (Base64URL): ${WebAuthManager.uint8ArrayToBase64(
+            new Uint8Array(credential.rawId)
+          )}`
+        );
+        return credential;
+      }
+
+      return null;
     } catch (err) {
-      console.error("❌ Failed to create credential:", err);
+      console.warn(
+        `❌ Failed to create credential: ${err.name} - ${err.message}`
+      );
       return null;
     }
   }
 
-  /** Retrieve an existing WebAuthn credential */
+  /** Retrieve an existing WebAuthn credential (Passkey Authentication) */
   async getCredential({
     challengeStr,
     allowCredentials = [],
@@ -94,21 +113,33 @@ export class WebAuthManager {
 
     try {
       const challenge = challengeStr
-        ? WebAuthManager.base64ToUint8Array(challengeStr)
+        ? WebAuthManager.base64ToUint8Array(challengeStr).buffer
         : WebAuthManager.randomBytes(32);
 
       const publicKey = {
         challenge,
+        rpId: window.location.hostname || "localhost",
         allowCredentials,
         timeout,
         userVerification: "required",
       };
 
+      console.log("📤 Sending request to authenticate with Passkey...");
       const assertion = await navigator.credentials.get({ publicKey });
-      console.info("✅ Credential retrieved successfully.");
-      return assertion;
+
+      if (assertion) {
+        console.log("✅ Credential retrieved successfully.");
+        console.log(
+          `Raw ID (Base64URL): ${WebAuthManager.uint8ArrayToBase64(
+            new Uint8Array(assertion.rawId)
+          )}`
+        );
+        return assertion;
+      }
+
+      return null;
     } catch (err) {
-      console.error("❌ Failed to get credential:", err);
+      console.warn(`❌ Failed to get credential: ${err.name} - ${err.message}`);
       return null;
     }
   }
@@ -122,11 +153,44 @@ export class WebAuthManager {
 
     try {
       const cred = new PasswordCredential({ id, password });
+      console.log(`📤 Requesting browser to store password for ID: ${id}...`);
       const stored = await navigator.credentials.store(cred);
-      console.info("✅ Password credential stored successfully.");
+      console.log("✅ Password credential stored successfully.");
       return stored;
     } catch (err) {
-      console.error("❌ Failed to store credential:", err);
+      console.warn(
+        `❌ Failed to store credential: ${err.name} - ${err.message}`
+      );
+      return null;
+    }
+  }
+
+  /** Retrieve a password credential using Credential Management API */
+  async getPasswordCredential() {
+    if (!this.hasCredentialsAPI) {
+      console.warn("⚠️ Credentials API not supported.");
+      return null;
+    }
+
+    try {
+      console.log("📥 Requesting browser to retrieve password credential...");
+      const cred = await navigator.credentials.get({
+        password: true,
+        mediation: "optional",
+      });
+
+      if (cred && cred.type === "password") {
+        console.log("✅ Password credential retrieved successfully.");
+        console.log(`Retrieved Username (ID): ${cred.id}`);
+        return cred;
+      }
+
+      console.warn("⚠️ No Password Credential found or user cancelled.");
+      return null;
+    } catch (err) {
+      console.warn(
+        `❌ Failed to retrieve password credential: ${err.name} - ${err.message}`
+      );
       return null;
     }
   }

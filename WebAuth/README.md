@@ -27,9 +27,7 @@ import { WebAuthnManager } from "@chispecial/web_auth";
 
   // ===== Authenticate / Get an existing credential =====
   const authResult = await webAuthn.getCredential({
-    allowCredentials: credential
-      ? [{ id: credential.rawId, type: "public-key" }]
-      : [],
+    allowCredentials: [{ id: credential.rawId, type: "public-key" }]
   });
   console.log("Authentication result:", authResult);
 
@@ -76,12 +74,7 @@ import { WebAuthnManager } from "@chispecial/web_auth";
 - Stores a password-based credential in the browser
 - Returns a `PasswordCredential` object or `null`
 
-### `deleteCredential()`
 
-- Clears all silent access for credentials (effectively logs the user out)
-- No API exists to delete a single WebAuthn credential from the browser
-
----
 
 ## ⚡ Example UI
 
