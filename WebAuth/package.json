@@ -1,6 +1,6 @@
 {
   "name": "@chispecial/web_auth",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "A lightweight Web Authentication library supporting WebAuthn, password credentials, and biometric login for browsers.",
   "main": "index.js",
   "type": "module",
@@ -10,13 +10,15 @@
     "access": "public"
   },
   "scripts": {
-    "publish": "npm publish --access public",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "echo 'No build step defined yet'",
+    "test": "echo 'No tests specified' && exit 0",
+    "prepare": "npm run build",
+    "release": "npm version patch && npm publish --access public",
+    "publish": "npm publish --access public"
   },
   "keywords": [
     "webauthn",
     "web authentication",
-    "Verify Bot",
     "password credentials",
     "biometrics login",
     "password manager",
@@ -35,15 +37,22 @@
     "fido2",
     "authenticator",
     "login library",
-    "js webauthn"
+    "js webauthn",
+    "WebAuthn API",
+    "credential store"
   ],
   "author": {
     "name": "Chinemerem Chukwukere",
-    "email": "chispecialshadrach@gmail.com"
+    "email": "chispecialshadrach@gmail.com",
+    "url": "https://github.com/shadrach-chukwukere"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shadrach-chukwukere/MyLibrary"
+    "url": "https://github.com/shadrach-chukwukere/MyLibrary/tree/main/WebAuth"
   },
-  "license": "ISC"
+  "homepage": "https://github.com/shadrach-chukwukere/MyLibrary/tree/main/WebAuth#readme",
+  "license": "ISC",
+  "engines": {
+    "node": ">=16.0.0"
+  }
 }

@@ -1,26 +1,45 @@
 {
   "name": "@chispecial/storage",
-  "version": "1.0.5",
-  "description": "indexDb local storage made easy",
+  "version": "1.0.6",
+  "description": "A lightweight, modern wrapper around IndexedDB for easy local database storage and retrieval.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "module": "index.js",
+  "types": "index.d.ts",
+  "type": "module",
   "keywords": [
-    "Database",
-    ".open",
-    ".set",
-    "indexDb"
+    "indexeddb",
+    "localstorage",
+    "storage",
+    "database",
+    "client-storage",
+    "browser-db",
+    "key-value-store",
+    "offline-storage",
+    "idb",
+    "data-persistence",
+    "cache"
   ],
   "author": {
     "name": "Chinemerem Chukwukere",
-    "email": "chispecialshadrach@gmail.com"
+    "email": "chispecialshadrach@gmail.com",
+    "url": "https://github.com/shadrach-chukwukere"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shadrach-chukwukere/MyLibrary/tree/main/Storage/"
+    "url": "https://github.com/shadrach-chukwukere/MyLibrary/tree/main/Storage"
   },
+  "homepage": "https://github.com/shadrach-chukwukere/MyLibrary/tree/main/Storage#readme",
   "license": "ISC",
-  "type": "module",
-  "types": "index.d.ts"
+  "scripts": {
+    "publish": "npm publish --access public",
+    "build": "echo 'No build step defined yet'",
+    "test": "echo 'No tests specified' && exit 0",
+    "prepare": "npm run build"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
