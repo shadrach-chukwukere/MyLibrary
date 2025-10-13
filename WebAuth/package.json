@@ -10,11 +10,13 @@
     "access": "public"
   },
   "scripts": {
+    "publish": "npm publish --access public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "webauthn",
     "web authentication",
+    "Verify Bot",
     "password credentials",
     "biometrics login",
     "password manager",

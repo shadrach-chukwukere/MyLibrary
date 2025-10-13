@@ -27,7 +27,9 @@ import { WebAuthnManager } from "@chispecial/web_auth";
 
   // ===== Authenticate / Get an existing credential =====
   const authResult = await webAuthn.getCredential({
-    allowCredentials: [{ id: credential.rawId, type: "public-key" }]
+    allowCredentials: credential
+      ? [{ id: credential.rawId, type: "public-key" }]
+      : [],
   });
   console.log("Authentication result:", authResult);
 
@@ -59,12 +61,12 @@ import { WebAuthnManager } from "@chispecial/web_auth";
 - `rpName` – Displayed name for your application (Relying Party)
 - `timeout` – Default timeout in milliseconds for credential operations
 
-### `createCredential({ username, displayName, challengeStr, timeout })`
+### `createCredential({ username, displayName})`
 
 - Creates a new WebAuthn credential for the user
 - Returns a `PublicKeyCredential` or `null` on failure
 
-### `getCredential({ allowCredentials, challengeStr, timeout })`
+### `getCredential({ allowCredentials})`
 
 - Authenticates a user with an existing WebAuthn credential
 - Returns a `PublicKeyCredential` or `null`
@@ -73,8 +75,6 @@ import { WebAuthnManager } from "@chispecial/web_auth";
 
 - Stores a password-based credential in the browser
 - Returns a `PasswordCredential` object or `null`
-
-
 
 ## ⚡ Example UI
 
