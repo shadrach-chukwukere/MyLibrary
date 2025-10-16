@@ -1,0 +1,50 @@
+{
+  "name": "@chispecial/user_media",
+  "version": "1.0.1",
+  "description": "A unified, browser-safe media manager for camera and screen capture with optional torch and audio support.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "type": "module",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo 'No tests specified' && exit 0",
+    "release": "npm version patch && npm publish --access public",
+    "publish": "npm publish --access public"
+  },
+  "keywords": [
+    "media",
+    "camera",
+    "screen capture",
+    "webrtc",
+    "torch",
+    "flashlight",
+    "user media",
+    "navigator.mediaDevices",
+    "video capture",
+    "audio capture",
+    "media stream",
+    "browser media",
+    "webcam",
+    "getUserMedia",
+    "getDisplayMedia",
+    "js media",
+    "unified media"
+  ],
+  "author": {
+    "name": "Chinemerem Shadrach Chukwukere",
+    "email": "chispecialshadrach@gmail.com",
+    "url": "https://github.com/shadrach-chukwukere"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shadrach-chukwukere/MyLibrary/tree/main/UserMedia"
+  },
+  "homepage": "https://github.com/shadrach-chukwukere/MyLibrary/tree/main/UserMedia#readme",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
